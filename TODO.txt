@@ -1,0 +1,3 @@
+Make sure all roles are unchecked when page is refreshed
+
+Create a component for author name which would validate input and display error tooltip

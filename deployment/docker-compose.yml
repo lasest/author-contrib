@@ -1,0 +1,14 @@
+services:
+    credit_service:
+        image: localhost/credit:latest
+        restart: always
+        environment:
+            PORT: "8080"
+            IP: "0.0.0.0"
+        ports:
+            - "8080:8081"
+        networks:
+            - main_network
+networks:
+    main_network:
+        driver: bridge
