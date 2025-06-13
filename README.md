@@ -17,4 +17,4 @@ The tool is available at <https://author-contrib.com>
 
 ## Contribution
 
-Feel free to submit pool requests or open issues
+Feel free to submit pull requests or open issues
