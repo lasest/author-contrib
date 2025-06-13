@@ -1,5 +1,7 @@
 # CRediT Statement Generator
 
+![](media/interface.png)
+
 This tool helps generate standardized CRediT authorship contribution statements for academic papers. Using a simple interface, users can select or specify each contributor's roles based on the CRediT (Contributor Roles Taxonomy) system, making the process of assigning authorship contributions accurate, transparent, and consistent.
 
 ## Features
