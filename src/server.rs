@@ -1,7 +1,6 @@
 use crate::app::App;
 use crate::env;
 use axum;
-use dioxus::prelude::{DioxusRouterExt, ServeConfigBuilder};
 use log::{info, LevelFilter};
 use simple_logger::SimpleLogger;
 use std::net::SocketAddr;
@@ -15,9 +14,7 @@ pub async fn run_server() {
 
     info!("Starting server");
 
-    let app = axum::Router::new()
-        .serve_dioxus_application(ServeConfigBuilder::default(), App)
-        .layer(axum::middleware::from_fn(log_requests));
+    let app = dioxus::server::router(App).layer(axum::middleware::from_fn(log_requests));
 
     let router = app.into_make_service();
 

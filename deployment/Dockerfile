@@ -21,8 +21,7 @@ RUN cargo binstall dioxus-cli --root /.cargo -y --force
 ENV PATH="/.cargo/bin:$PATH"
 
 # Create the final bundle folder.
-# Bundle always executes in release mode with optimizations enabled
-RUN dx bundle --platform web
+RUN dx bundle --platform web --release
 
 ###### Create the final image
 
@@ -33,4 +32,4 @@ COPY --from=builder /app/target/dx/credit/release/web/ /usr/local/app
 EXPOSE 8080
 
 WORKDIR /usr/local/app
-ENTRYPOINT [ "/usr/local/app/server" ]
+ENTRYPOINT [ "/usr/local/app/credit" ]
