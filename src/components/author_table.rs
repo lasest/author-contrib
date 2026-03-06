@@ -43,7 +43,7 @@ pub fn AuthorTable() -> Element {
 
     rsx! {
         div {
-            table {
+            table { class: "mt-35",
                 thead {
                     th { class: "align-bottom",
                         "Author"
@@ -61,7 +61,14 @@ pub fn AuthorTable() -> Element {
                         }
                     }
                     for role in Roles::iter() {
-                        th { class: "vertical-text", "{role.to_string()}" }
+                        th { class: "w-0 whitespace-nowrap",
+                            span {
+                                style: "transform: rotate(-50deg); transform-origin: left bottom;",
+                                class: "absolute inline-block leading-none whitespace-nowrap overflow-visible",
+                                "{role.to_string()}"
+                            }
+
+                        }
                     }
                 }
                 tbody {

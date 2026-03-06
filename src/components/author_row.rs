@@ -31,7 +31,7 @@ pub fn AuthorRow(
                 }
             }
             for role in Roles::iter() {
-                td { class: "p-1",
+                td { class: "p-3",
                     input {
                         r#type: "checkbox",
                         class: "h-5 w-5 text-blue-600 bg-white border-gray-300 rounded focus:ring-2 focus:ring-blue-500 hover:shadow-lg transition-all duration-200 ease-in-out",
