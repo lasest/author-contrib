@@ -8,6 +8,7 @@ use crate::components::AuthorRow;
 use crate::components::{Tooltip, TooltipPosition};
 use crate::models::author::{render_credit_statement, Author};
 use crate::models::credit_format::CreditFormat;
+use crate::models::grouping_type::GroupingType;
 use crate::models::roles::Roles;
 
 #[component]
@@ -29,9 +30,15 @@ pub fn AuthorTable() -> Element {
     };
 
     let mut credit_format = use_signal(|| CreditFormat::Long);
+    let mut grouping_type = use_signal(|| GroupingType::ByAuthor);
 
-    let credit_statement =
-        use_memo(move || render_credit_statement(authors.read().to_vec(), &credit_format.read()));
+    let credit_statement = use_memo(move || {
+        render_credit_statement(
+            authors.read().to_vec(),
+            &credit_format.read(),
+            &grouping_type.read(),
+        )
+    });
 
     let tooltip_content = rsx!(
         div {
@@ -43,7 +50,7 @@ pub fn AuthorTable() -> Element {
 
     rsx! {
         div {
-            table { class: "mt-35",
+            table { class: "mt-40",
                 thead {
                     th { class: "align-bottom",
                         "Author"
@@ -105,6 +112,28 @@ pub fn AuthorTable() -> Element {
                     }
                     option { class: "bg-white text-gray-800 dark:bg-gray-800 dark:text-white",
                         "Short names"
+                    }
+                }
+            }
+            div { class: "mt-6",
+                label { class: "mx-2", "Group by:" }
+                select {
+                    class: "px-2 py-1 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-800 text-gray-100",
+                    onchange: {
+                        move |e: FormEvent| {
+                            let selected_value = e.value();
+                            *grouping_type.write() = match selected_value.as_str() {
+                                "By author" => GroupingType::ByAuthor,
+                                "By contribution" => GroupingType::ByContrib,
+                                _ => GroupingType::ByAuthor,
+                            };
+                        }
+                    },
+                    option { class: "bg-white text-gray-800 dark:bg-gray-800 dark:text-white",
+                        "By author"
+                    }
+                    option { class: "bg-white text-gray-800 dark:bg-gray-800 dark:text-white",
+                        "By contribution"
                     }
                 }
             }

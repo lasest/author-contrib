@@ -1,6 +1,6 @@
 use strum_macros::EnumIter;
 
-#[derive(Debug, PartialEq, EnumIter, Clone)]
+#[derive(Debug, PartialEq, Eq, Hash, EnumIter, Clone)]
 pub enum Roles {
     Conceptualization,
     DataCuration,
